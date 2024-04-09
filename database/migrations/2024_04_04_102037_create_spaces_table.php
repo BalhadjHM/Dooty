@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('spaces', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('space_name');
-            $table->text('space_description')->nullable();
+            $table->string('title');
+            $table->text('description')->nullable();
             $table->json('tags')->nullable();
             $table->timestamps();
         });

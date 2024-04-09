@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('space_id')->constrained()->onDelete('cascade');
-            $table->string('task_name');
-            $table->text('task_description')->nullable();
-            $table->dateTime('task_due_date')->nullable();
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->dateTime('due_date')->nullable();
             $table->timestamps();
         });
     }

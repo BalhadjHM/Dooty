@@ -12,7 +12,10 @@
             <!-- Search bar -->
             <x-search />
             <!-- Create -->
-            <a href="#" class="py-2 px-4 bg-accent poppins-medium text-sm rounded-md shadow">Create a Space</a>
+            @php
+                $userId = Auth::id();
+            @endphp
+            <a href="{{ route('space.create', ['userId' => $userId]) }}" class="py-2 px-4 bg-accent poppins-medium text-sm rounded-md shadow">Create a Space</a>
         </div>
 
         <!-- Spaces -->
