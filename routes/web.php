@@ -12,3 +12,6 @@ Route::get('/signup', [HomeController::class , 'signup'])->name('user.signup');
 Route::post('/', [HomeController::class , 'store'])->name('user.store');
 Route::get('/login', [HomeController::class , 'login'])->name('user.login');
 Route::post('/login', [HomeController::class , 'authenticate'])->name('user.authenticate');
+
+// dashboard routes
+Route::get('/dashboard/{userId}', [SpaceController::class , 'index'])->name('user.index');

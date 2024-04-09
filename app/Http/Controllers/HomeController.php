@@ -55,7 +55,7 @@ class HomeController extends Controller
         ]);
 
         // redirect to the login page
-        return to_route('user.login');
+        return redirect()->route('user.login');
     }
 
     // display the login page
@@ -80,13 +80,15 @@ class HomeController extends Controller
         ]);
 
         // Retrieve the user details
+        $id = User::where('email', request('email'))->first()->id;
         $email = request('email');
         $password = request('password');
 
         // authenticate the user
         if (auth()->attempt(['email' => $email, 'password' => $password])) {
             // redirect to the user dashboard
-            return to_route('user.dashboard');
+
+            return redirect()->route('user.index', ['userId' => $id])->with(['success' => 'You have successfully logged in.']);
         }
 
         // redirect to the login page
