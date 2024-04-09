@@ -7,14 +7,15 @@ export default {
       'node_modules/preline/dist/*.js'
   ],
   theme: {
-      colors: {
-          'text': '#000',
-          'background': '#fdfaf7',
-          'primary': '#d7882d',
-          'secondary': '#f0be8a',
-          'accent': '#f2a145',
-      },
-    extend: {},
+    extend: {
+        colors: {
+            'text': '#000',
+            'background': '#fdfaf7',
+            'primary': '#d7882d',
+            'secondary': '#f0be8a',
+            'accent': '#f2a145',
+        },
+    },
   },
   plugins: [
       require('preline/plugin'),
