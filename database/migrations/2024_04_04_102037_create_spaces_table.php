@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('space_name');
+            $table->text('space_description')->nullable();
             $table->json('tags')->nullable();
             $table->timestamps();
         });
