@@ -6,7 +6,7 @@
     <x-slot name="content">
         <x-alert />
         <div class="w-4/5 md:w-1/2 my-10 mx-auto py-4 md:py-6 px-4 md:px-8 bg-background rounded-md shadow-sm">
-            <div class="xl:h-72 flex flex-col xl:flex-row items-center xl:space-x-12">
+            <div class="xl:h-[70%] flex flex-col xl:flex-row items-center xl:space-x-12">
                 <div class="w-full h-full xl:basis-1/3 flex items-center bg-accent rounded-md">
                     <img class="mx-auto w-40 sm:w-52 max-h-40 sm:max-h-52" src="{{ asset('images/marshmallow 2.png') }}" alt="Logo">
                 </div>
