@@ -77,4 +77,15 @@ public function store($userId)
         // redirect to the user dashboard
         return redirect()->route('user.index', ['userId' => $userId]);
     }
+
+    // delete the space
+    public function destroy($userId, $spaceId)
+    {
+        // retrieve the space and delete it
+        Space::destroy($spaceId);
+
+        // redirect to the user dashboard
+        return redirect()->route('user.index', ['userId' => $userId]);
+    }
 }
+

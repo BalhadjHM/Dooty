@@ -17,3 +17,8 @@ Route::post('/login', [HomeController::class , 'authenticate'])->name('user.auth
 Route::get('/dashboard/{userId}', [SpaceController::class , 'index'])->name('user.index');
 Route::get('/dashboard/{userId}/create', [SpaceController::class , 'create'])->name('space.create');
 Route::post('/dashboard/{userId}', [SpaceController::class , 'store'])->name('space.store');
+Route::get('/dashboard/{userId}/edit/{spaceId}', [SpaceController::class , 'edit'])->name('space.edit');
+Route::put('/dashboard/{userId}/{spaceId}', [SpaceController::class , 'update'])->name('space.update');
+Route::delete('/dashboard/{userId}/{spaceId}', [SpaceController::class , 'destroy'])->name('space.destroy');
+Route::get('/dashboard/{userId}/search', [SpaceController::class , 'search'])->name('space.search');
+Route::get('/dashboard/{userId}/tag/{tagId}', [SpaceController::class , 'tag'])->name('space.tag');

@@ -20,10 +20,10 @@
 
         <!-- Spaces -->
         @foreach($spaces as $space)
-            <div class="w-4/5 md:w-1/2 my-10 mx-auto py-4 md:py-6 px-4 md:px-8 bg-background rounded-md shadow-sm cursor-pointer duration-300 ease-in-out hover:scale-105">
+            <div class="w-4/5 md:w-1/2 my-10 mx-auto py-4 md:py-6 px-4 md:px-8 bg-background rounded-md shadow-sm cursor-pointer duration-300 ease-in-out hover:scale-[1.02]">
                 <div class="mb-4 pb-4 flex justify-between items-center border-b-2 border-accent">
                     {{--Title--}}
-                    <h2 class="text-text text-xl md:text-2xl poppins-bold text-center capitalize">{{ $space->title }}</h2>
+                    <h2 class="text-text text-xl md:text-2xl poppins-bold capitalize">{{ $space->title }}</h2>
                     {{--Dropdown menu--}}
                     <div class="hs-dropdown relative inline-flex">
                         <button id="hs-dropdown-custom-icon-trigger" type="button" class="hs-dropdown-toggle flex justify-center items-center size-9 text-sm font-semibold rounded-lg border border-gray-200 bg-b text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
@@ -40,9 +40,14 @@
                                 Edit
                             </a>
                             <hr class="border-gray-200">
-                            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-accent focus:outline-none focus:bg-gray-200" href="#">
-                                <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M22 12C22 15.7712 22 17.6569 20.7961 18.8284C19.5921 20 17.6544 20 13.779 20H11.142C8.91458 20 7.80085 20 6.87114 19.4986C5.94144 18.9971 5.35117 18.0781 4.17061 16.24L3.48981 15.18C2.4966 13.6336 2 12.8604 2 12C2 11.1396 2.4966 10.3664 3.48981 8.82001L4.17061 7.76001C5.35117 5.92191 5.94144 5.00286 6.87114 4.50143C7.80085 4 8.91458 4 11.142 4L13.779 4C17.6544 4 19.5921 4 20.7961 5.17157C21.4673 5.82475 21.7643 6.69989 21.8957 8" stroke="#545454" stroke-width="1.5" stroke-linecap="round"></path> <path d="M15.5 9.50002L10.5 14.5M10.5 9.5L15.5 14.5" stroke="#545454" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
-                                Delete
+                                <form action="{{ route('space.destroy', ['spaceId' => $space->id, 'userId' => $userId]) }}" method="post" class="m-0">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-accent focus:outline-none focus:bg-gray-200">
+                                        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M22 12C22 15.7712 22 17.6569 20.7961 18.8284C19.5921 20 17.6544 20 13.779 20H11.142C8.91458 20 7.80085 20 6.87114 19.4986C5.94144 18.9971 5.35117 18.0781 4.17061 16.24L3.48981 15.18C2.4966 13.6336 2 12.8604 2 12C2 11.1396 2.4966 10.3664 3.48981 8.82001L4.17061 7.76001C5.35117 5.92191 5.94144 5.00286 6.87114 4.50143C7.80085 4 8.91458 4 11.142 4L13.779 4C17.6544 4 19.5921 4 20.7961 5.17157C21.4673 5.82475 21.7643 6.69989 21.8957 8" stroke="#545454" stroke-width="1.5" stroke-linecap="round"></path> <path d="M15.5 9.50002L10.5 14.5M10.5 9.5L15.5 14.5" stroke="#545454" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+                                        Delete
+                                    </button>
+                                </form>
                             </a>
                         </div>
                     </div>
@@ -50,7 +55,7 @@
                 <div class="space-y-6 md:space-y-4">
                     <!-- description -->
                     <div>
-                        <p class="text-text open-sans-regular text-xs md:text-sm text-justify indent-4">
+                        <p class="text-text open-sans-regular text-xs md:text-sm text-justify indent-4 whitespace-normal">
                             {{ $space->description }}
                         </p>
                     </div>
