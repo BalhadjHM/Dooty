@@ -6,7 +6,7 @@
     <x-slot name="content">
         <x-alert />
         <div class="w-4/5 md:w-1/2 my-10 mx-auto py-4 md:py-6 px-4 md:px-8 bg-background rounded-md shadow-sm">
-            <div class="xl:h-[70%] flex flex-col xl:flex-row items-center xl:space-x-12">
+            <div class="xl:h-[60%] flex flex-col xl:flex-row items-center xl:space-x-12">
                 <div class="w-full h-full xl:basis-1/3 flex items-center bg-accent rounded-md">
                     <img class="mx-auto w-40 sm:w-52 max-h-40 sm:max-h-52" src="{{ asset('images/marshmallow 2.png') }}" alt="Logo">
                 </div>
@@ -24,7 +24,7 @@
                         </div>
                         <div>
                             <button type="submit" class=" mt-2 py-2 px-4 bg-accent poppins-medium text-sm rounded-md shadow">Login</button>
-                            <a href="{{ route('user.login') }}" class="block sm:inline mt-4 sm:mt-0 sm:ml-8 text-center sm:text-start open-sans-medium text-xs text-primary hover:underline underline-offset-2">Don't have an account? Register here</a>
+                            <a href="{{ route('user.signup') }}" class="block sm:inline mt-4 sm:mt-0 sm:ml-8 text-center sm:text-start open-sans-medium text-xs text-primary hover:underline underline-offset-2">Don't have an account? Register here</a>
                         </div>
                     </form>
                 </div>

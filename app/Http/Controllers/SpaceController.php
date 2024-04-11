@@ -78,6 +78,57 @@ public function store($userId)
         return redirect()->route('user.index', ['userId' => $userId]);
     }
 
+    // display the edit form
+    public function edit($userId, $spaceId)
+    {
+        return view('Spaces.edit', ['spaceId' => $spaceId, 'userId' => $userId]);
+    }
+
+    // update the space details
+    public function update($userId, $spaceId)
+    {
+        // validate the space details
+        request()->validate([
+            'title' => ['required', 'string', 'max:70'],
+            'description' => ['required', 'string', 'max:255'],
+            'tagsArray' => ['required'],
+        ],
+        [
+            'title.required' => 'The title field is required.',
+            'title.string' => 'The title must be a string.',
+            'title.max' => 'The title may not be greater than 70 characters.',
+            'description.required' => 'The description field is required.',
+            'description.string' => 'The description must be a string.',
+            'description.max' => 'The description may not be greater than 255 characters.',
+            'tagsArray.required' => 'The tags field is required.',
+        ]);
+
+        // retrieve the space details
+        $title = request('title');
+        $description = request('description');
+        $tags = json_decode(request('tagsArray'), true);
+
+        // update the space details
+        $space = Space::find($spaceId);
+        $space->title = $title;
+        $space->description = $description;
+        $space->save();
+
+        // delete the existing tags
+        Tag::where('space_id', $spaceId)->delete();
+
+        // store the tags in the tag table
+        foreach($tags as $tag) {
+            $tag = Tag::create([
+                'name' => $tag,
+                'space_id' => $spaceId
+            ]);
+        }
+
+        // redirect to the user dashboard
+        return redirect()->route('user.index', ['userId' => $userId]);
+    }
+
     // delete the space
     public function destroy($userId, $spaceId)
     {
@@ -86,6 +137,28 @@ public function store($userId)
 
         // redirect to the user dashboard
         return redirect()->route('user.index', ['userId' => $userId]);
+    }
+
+    // search for a space
+    public function search($userId)
+    {
+        // retrieve the search term
+        $searchTerm = request('search');
+
+        // retrieve the user spaces
+        $spaces = Space::where('user_id', $userId)
+            ->where('title', 'like', '%' . $searchTerm . '%')
+            ->orWhere('description', 'like', '%' . $searchTerm . '%')
+            ->get();
+
+        // retrieve the tags for each space
+        foreach($spaces as $space) {
+            $tags = Tag::where('space_id', $space->id)->get();
+            $space->tags = $tags;
+        }
+
+        // return the user spaces
+        return view('Spaces.index', ['spaces' => $spaces, 'searchTerm' => $searchTerm]);
     }
 }
 

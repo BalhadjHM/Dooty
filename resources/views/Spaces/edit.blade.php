@@ -1,6 +1,6 @@
 <x-layouts.app>
     <x-slot name="title">
-        Create new space
+        Edit Space
     </x-slot>
 
     <x-slot name="content">
@@ -9,15 +9,16 @@
         <div class="w-4/5 md:w-1/2 my-10 mx-auto py-4 md:py-6 px-4 md:px-8 bg-background rounded-md shadow-sm">
             <div class="xl:h-[60%] flex flex-col xl:flex-row items-center xl:space-x-12">
                 <div class="w-full h-full xl:basis-1/3 flex items-center bg-accent rounded-md">
-                    <img class="mx-auto w-40 sm:w-52 max-h-40 sm:max-h-52" src="{{ asset('images/marshmallow 1.png') }}" alt="Logo">
+                    <img class="mx-auto w-40 sm:w-52 max-h-40 sm:max-h-52" src="{{ asset('images/marshmallow 4.png') }}" alt="Logo">
                 </div>
                 <div class="py-2 w-full xl:basis-2/3 space-y-4">
-                    <h1 class="my-2 text-text text-2xl sm:text-3xl poppins-bold">Creating Spaces</h1>
+                    <h1 class="my-2 text-text text-2xl sm:text-3xl poppins-bold">Editing Spaces</h1>
                     @php
                         $userId = Auth::id();
                     @endphp
-                    <form action="{{ route('space.store', ['userId' => $userId]) }}" method="POST" class="space-y-2 md:space-y-2">
+                    <form action="{{ route('space.update', ['userId' => $userId, 'spaceId' => $spaceId]) }}" method="POST" class="space-y-2 md:space-y-2">
                         @csrf
+                        @method('PUT')
                         <div class="flex flex-col gap-1">
                             <label for="title" class="open-sans-medium text-text text-sm">Title</label>
                             <input type="text" name="title" id="title" value="{{ old('title') }}" class="py-2 px-2 bg-background text-text open-sans-medium text-sm rounded-md border-text focus:border-accent focus:ring-1 focus:ring-accent">
