@@ -9,7 +9,6 @@ const output = document.getElementById('output');
 let tags = [];
 
 // Add event listener for input event
-// Add event listener for input event
 inputField.addEventListener('keypress', function(event) {
     // Check if "Space" key is pressed
     if (event.key === ' ' && inputField.value.trim() !== '') {
@@ -22,6 +21,9 @@ inputField.addEventListener('keypress', function(event) {
 
         // Add the tag value to the array
         tags.push(tagContent);
+
+        // Update the hidden input field with the new tags array
+        document.getElementById('tagsArray').value = JSON.stringify(tags);
 
         // Clear the input field
         inputField.value = '';

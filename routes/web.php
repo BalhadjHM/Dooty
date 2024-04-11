@@ -16,3 +16,4 @@ Route::post('/login', [HomeController::class , 'authenticate'])->name('user.auth
 // dashboard routes
 Route::get('/dashboard/{userId}', [SpaceController::class , 'index'])->name('user.index');
 Route::get('/dashboard/{userId}/create', [SpaceController::class , 'create'])->name('space.create');
+Route::post('/dashboard/{userId}', [SpaceController::class , 'store'])->name('space.store');
