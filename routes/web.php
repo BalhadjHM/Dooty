@@ -24,3 +24,6 @@ Route::get('/dashboard/{userId}/search', [SpaceController::class , 'search'])->n
 Route::get('/dashboard/{userId}/tag/{tagId}', [SpaceController::class , 'tag'])->name('space.tag');
 Route::put('/dashboard/{userId}/pin/{spaceId}', [SpaceController::class , 'pin'])->name('space.pin');
 Route::put('/dashboard/{userId}/unpin/{spaceId}', [SpaceController::class , 'unpin'])->name('space.unpin');
+
+// task routes
+Route::get('/dashboard/{userId}/{spaceId}', [TaskController::class , 'index'])->name('task.index');

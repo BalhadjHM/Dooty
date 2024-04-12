@@ -10,6 +10,9 @@
         </x-slot>
 
         <x-slot name="content">
+            <!-- Alert Message -->
+            <x-alert/>
+
             <!-- Success Message -->
             <x-success/>
 
@@ -24,8 +27,7 @@
 
             <!-- Spaces -->
             @foreach($spaces as $space)
-                <div
-                    class="w-4/5 md:w-1/2 my-10 mx-auto py-4 md:py-6 px-4 md:px-8 bg-background rounded-md shadow-sm cursor-pointer duration-300 ease-in-out hover:scale-[1.02]">
+                <div id="space-card" data-user-id="{{ $userId }}" data-space-id="{{ $space->id }}" class="w-4/5 md:w-1/2 my-10 mx-auto py-4 md:py-6 px-4 md:px-8 bg-background rounded-md shadow-sm cursor-pointer duration-300 ease-in-out hover:scale-[1.02]">
                     <div class="mb-4 pb-4 flex justify-between items-center border-b-2 border-accent">
                         {{--Title--}}
                         <h2 class="text-text text-xl md:text-2xl poppins-bold capitalize">
@@ -36,9 +38,8 @@
                             @endif
                         </h2>
                         {{--Dropdown menu--}}
-                        <div class="hs-dropdown relative inline-flex">
-                            <button id="hs-dropdown-custom-icon-trigger" type="button"
-                                    class="hs-dropdown-toggle flex justify-center items-center size-9 text-sm font-semibold rounded-lg border border-gray-200 bg-b text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                        <div id="dropdown" class="hs-dropdown relative inline-flex">
+                            <button id="hs-dropdown-custom-icon-trigger" type="button" class="hs-dropdown-toggle flex justify-center items-center size-9 text-sm font-semibold rounded-lg border border-gray-200 bg-b text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
                                 <svg class="flex-none size-4 text-gray-600" xmlns="http://www.w3.org/2000/svg"
                                      width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -47,17 +48,13 @@
                                     <circle cx="12" cy="19" r="1"/>
                                 </svg>
                             </button>
-                            <div
-                                class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-36 bg-background shadow-md rounded-lg p-2 mt-2"
+                            <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-36 bg-background shadow-md rounded-lg p-2 mt-2"
                                 aria-labelledby="hs-dropdown-custom-icon-trigger">
                                 @if($space->pinned == 0)
-                                    <form
-                                        action="{{ route('space.pin', ['userId' => $userId, 'spaceId' => $space->id]) }}"
-                                        method="post" class="m-0">
+                                    <form action="{{ route('space.pin', ['userId' => $userId, 'spaceId' => $space->id]) }}" method="post" class="m-0">
                                         @csrf
                                         @method('PUT')
-                                        <button type="submit"
-                                                class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-accent focus:outline-none focus:bg-gray-200">
+                                        <button type="submit" class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-accent focus:outline-none focus:bg-gray-200">
                                             <svg width="20px" height="20px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg" stroke="#000000"
                                                  stroke-width="0.00024000000000000003" transform="rotate(0)">
@@ -77,13 +74,10 @@
                                         </button>
                                     </form>
                                 @elseif($space->pinned == 1)
-                                    <form
-                                        action="{{ route('space.unpin', ['userId' => $userId, 'spaceId' => $space->id]) }}"
-                                        method="post" class="m-0">
+                                    <form action="{{ route('space.unpin', ['userId' => $userId, 'spaceId' => $space->id]) }}" method="post" class="m-0">
                                         @csrf
                                         @method('PUT')
-                                        <button type="submit"
-                                                class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-accent focus:outline-none focus:bg-gray-200">
+                                        <button type="submit" class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-accent focus:outline-none focus:bg-gray-200">
                                             <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg" stroke="#000000">
                                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -109,8 +103,7 @@
                                     </form>
                                 @endif
                                 <hr class="border-gray-200">
-                                <a href="{{ route('space.edit', ['userId' => $userId, 'spaceId' => $space->id]) }}"
-                                   class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-accent focus:outline-none focus:bg-gray-200">
+                                <a href="{{ route('space.edit', ['userId' => $userId, 'spaceId' => $space->id]) }}" class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-accent focus:outline-none focus:bg-gray-200">
                                     <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -135,9 +128,7 @@
                                     Edit
                                 </a>
                                 <hr class="border-gray-200">
-                                <form
-                                    action="{{ route('space.destroy', ['spaceId' => $space->id, 'userId' => $userId]) }}"
-                                    method="post" class="m-0">
+                                <form action="{{ route('space.destroy', ['spaceId' => $space->id, 'userId' => $userId]) }}" method="post" class="m-0">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
@@ -175,8 +166,7 @@
                         <!-- tags -->
                         <div class="flex justify-start items-center flex-wrap gap-1">
                             @foreach($space->tags as $tag)
-                                <a href="#"
-                                   class="py-1 px-2 text-text open-sans-medium text-xs bg-secondary rounded-full">{{ $tag->name }}</a>
+                                <a href="#" class="py-1 px-2 text-text open-sans-medium text-xs bg-secondary rounded-full">{{ $tag->name }}</a>
                             @endforeach
                         </div>
                         <div class="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 sm:gap-0">

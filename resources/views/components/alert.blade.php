@@ -9,7 +9,7 @@
                 </svg>
             </div>
             <div class="ms-4">
-                <h3 class="text-sm open-sans-semibold-semibold">
+                <h3 class="text-sm open-sans-semibold">
                     A problem has been occurred while submitting your data.
                 </h3>
                 <div class="mt-2 text-sm text-red-700">
