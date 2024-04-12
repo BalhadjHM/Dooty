@@ -16,7 +16,7 @@ class SpaceController extends Controller
         $userId = Auth::id();
 
         // retrieve the user spaces
-        $spaces = Space::where('user_id', $userId)->get();
+        $spaces = Space::where('user_id', $userId)->orderBy('pinned', 'desc')->get();
 
         // retrieve the tags for each space
         foreach($spaces as $space) {
@@ -149,6 +149,7 @@ public function store($userId)
         $spaces = Space::where('user_id', $userId)
             ->where('title', 'like', '%' . $searchTerm . '%')
             ->orWhere('description', 'like', '%' . $searchTerm . '%')
+            ->orderBy('pinned', 'desc')
             ->get();
 
         // retrieve the tags for each space
@@ -159,6 +160,52 @@ public function store($userId)
 
         // return the user spaces
         return view('Spaces.index', ['spaces' => $spaces, 'searchTerm' => $searchTerm]);
+    }
+
+    // pin the spaces
+    public function pin($userId, $spaceId)
+    {
+        // set the pinned status
+        Space::where('user_id', $userId)
+            ->where('id', $spaceId)
+            ->where('pinned', 0)
+            ->update(['pinned' => 1]);
+
+        // retrieve the user spaces
+        $spaces = Space::where('user_id', $userId)->orderBy('pinned', 'desc')
+            ->get();
+
+        // retrieve the tags for each space
+        foreach($spaces as $space) {
+            $tags = Tag::where('space_id', $space->id)->get();
+            $space->tags = $tags;
+        }
+
+        // return the user spaces
+        return view('Spaces.index', ['spaces' => $spaces]);
+    }
+
+    // unpin the spaces
+    public function unpin($userId, $spaceId)
+    {
+        // set the pinned status
+        Space::where('user_id', $userId)
+            ->where('id', $spaceId)
+            ->where('pinned', 1)
+            ->update(['pinned' => 0]);
+
+        // retrieve the user spaces
+        $spaces = Space::where('user_id', $userId)->orderBy('pinned', 'desc')
+            ->get();
+
+        // retrieve the tags for each space
+        foreach($spaces as $space) {
+            $tags = Tag::where('space_id', $space->id)->get();
+            $space->tags = $tags;
+        }
+
+        // return the user spaces
+        return view('Spaces.index', ['spaces' => $spaces]);
     }
 }
 
