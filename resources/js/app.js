@@ -59,4 +59,43 @@ document.addEventListener("DOMContentLoaded", function() {
                 event.stopPropagation();
             });
         }
+
+    // Get a reference to the task card element
+        let task = document.getElementById("task-card");
+
+        if (task) { // Check if the element exists
+            // Attach click event listener to the card
+            task.addEventListener("click", function() {
+                // Get the user ID, space ID, and task ID from the data-* attributes
+                let userId = task.dataset.userId;
+                let spaceId = task.dataset.spaceId;
+                let taskId = task.dataset.taskId;
+
+                // Check if the task card is already checked
+                let url;
+                if (task.style.textDecoration === "line-through") {
+                    // Construct the URL for unchecking the task
+                    url = `/dashboard/${userId}/${spaceId}/uncheck/${taskId}`;
+                    task.style.textDecoration = "none";
+                } else {
+                    // Construct the URL for checking the task
+                    url = `/dashboard/${userId}/${spaceId}/check/${taskId}`;
+                    task.style.textDecoration = "line-through";
+                }
+
+                // Make a PUT request to the server
+                fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {})
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            });
+        }
 });

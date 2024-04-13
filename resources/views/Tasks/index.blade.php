@@ -22,10 +22,9 @@
             </div>
 
             <!-- Tasks -->
-            @foreach($tasks as $task)
-                <div class="w-4/5 md:w-1/2 my-10 mx-auto py-4 md:py-6 px-4 md:px-8 bg-background rounded-md shadow-sm">
-                    <div class="w-full px-4 py-2 flex flex-row justify-between items-stretch gap-4 divide-x divide-slate-100 border border-slate-200 rounded-md shadow-sm duration-300 ease-in-out hover:shadow hover:scale-[1.01]">
-                        <!-- Task content-->
+            <div class="w-4/5 md:w-1/2 my-10 mx-auto py-4 md:py-6 px-4 md:px-8 flex flex-col gap-2 bg-background rounded-md shadow-sm">
+                @foreach($tasks as $task)
+                    <div id="task-card" data-user-id="{{ $userId }}" data-space-id="{{ $spaceId }}" data-task-id="{{ $task->id }}" class="w-full px-4 py-2 flex flex-row justify-between items-stretch gap-4 divide-x divide-slate-100 border border-slate-200 rounded-md shadow-sm cursor-pointer duration-300 ease-in-out hover:shadow hover:scale-[1.01] {{ $task->status == 0 ? 'line-through' : '' }}">
                         <div class="flex flex-col grow-0 justify-start items-start gap-2">
                             <div class="flex flex-col justify-center items-start">
                                 <h3 class="text-xs lg:text-sm text-text open-sans-semibold capitalize">{{ $task->title }}</h3>
@@ -39,7 +38,7 @@
                         <!-- Task actions-->
                         <div class="pl-3 flex flex-col gap-2 items-start">
                             {{--Dropdown menu--}}
-                            <div id="dropdown" class="hs-dropdown relative inline-flex">
+                            <div id="dropdown-two" class="hs-dropdown relative inline-flex">
                                 <button id="hs-dropdown-custom-icon-trigger" type="button" class="hs-dropdown-toggle flex justify-center items-center size-7 sm:size-9 text-sm font-semibold rounded-lg border border-gray-200 bg-b text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
                                     <svg class="flex-none size-4 text-gray-600" xmlns="http://www.w3.org/2000/svg"
                                          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -121,8 +120,8 @@
                             @endif
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </x-slot>
     </x-layouts.app>
 @else
