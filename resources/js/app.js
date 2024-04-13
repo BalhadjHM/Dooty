@@ -98,4 +98,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             });
         }
+
+        // Get a reference to the dropdown menu
+        let dropdown_two = document.getElementById("dropdown-two");
+
+        if (dropdown_two) { // Check if the element exists
+            // Stop propagation of click event on the dropdown menu
+            dropdown_two.addEventListener("click", function(event) {
+                event.stopPropagation();
+            });
+        }
 });

@@ -57,6 +57,15 @@ class TaskController extends Controller
         return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId]);
     }
 
+    // delete a task
+    public function destroy($userId, $spaceId, $taskId){
+        // delete the task
+        Task::destroy($taskId);
+
+        // redirect to the task's index page
+        return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId]);
+    }
+
     // add check functionality
     public function check($userId, $spaceId, $taskId){
         // retrieve the task
