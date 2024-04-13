@@ -27,3 +27,11 @@ Route::put('/dashboard/{userId}/unpin/{spaceId}', [SpaceController::class , 'unp
 
 // task routes
 Route::get('/dashboard/{userId}/{spaceId}', [TaskController::class , 'index'])->name('task.index');
+Route::get('/dashboard/{userId}/{spaceId}/create', [TaskController::class , 'create'])->name('task.create');
+Route::post("/dashboard/{userId}/{spaceId}", [TaskController::class , 'store'])->name('task.store');
+Route::get('/dashboard/{userId}/{spaceId}/edit/{taskId}', [TaskController::class , 'edit'])->name('task.edit');
+Route::put('/dashboard/{userId}/{spaceId}/{taskId}', [TaskController::class , 'update'])->name('task.update');
+Route::delete('/dashboard/{userId}/{spaceId}/{taskId}', [TaskController::class , 'destroy'])->name('task.destroy');
+Route::get('/dashboard/{userId}/{spaceId}/search', [TaskController::class , 'search'])->name('task.search');
+Route::put('/dashboard/{userId}/{spaceId}/star/{taskId}', [TaskController::class , 'star'])->name('task.star');
+Route::put('/dashboard/{userId}/{spaceId}/unstar/{taskId}', [TaskController::class , 'unstar'])->name('task.unstar');

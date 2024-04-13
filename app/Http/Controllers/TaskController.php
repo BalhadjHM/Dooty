@@ -16,4 +16,55 @@ class TaskController extends Controller
         //check if tasks exist
         return view('tasks.index', ['tasks' => $tasks, 'userId' => $userId, 'spaceId' => $spaceId]);
     }
+
+    // display the form to create a new task
+    public function create($userId, $spaceId){
+        return view('tasks.create', ['userId' => $userId, 'spaceId' => $spaceId]);
+    }
+
+    // store a new task
+    public function store($userId, $spaceId){
+        //validate data of the form
+        $data = request()->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'due_date' => ['required', 'date'],
+        ], [
+            'title.required' => 'The title field is required',
+            'title.string' => 'The title field must be a string',
+            'title.max' => 'The title field must not exceed 255 characters',
+            'description.required' => 'The description field is required',
+            'description.string' => 'The description field must be a string',
+            'due_date.required' => 'The due date field is required',
+            'due_date.date' => 'The due date field must be a date',
+        ]);
+
+        // retrieve the data from the form
+        $title = request('title');
+        $description = request('description');
+        $due_date = request('due_date');
+
+        // create a new task
+        $task = Task::create([
+            'title' => $title,
+            'description' => $description,
+            'due_date' => $due_date,
+            'space_id' => $spaceId,
+        ]);
+
+        // redirect to the task's index page
+        return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId]);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
