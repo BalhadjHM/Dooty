@@ -1,6 +1,6 @@
 <x-layouts.app>
     <x-slot name="title">
-        Dooty
+        Dooty Hub
     </x-slot>
 
     <x-slot name="content">

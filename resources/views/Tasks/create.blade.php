@@ -1,6 +1,6 @@
 <x-layouts.app>
     <x-slot name="title">
-        Add Tasks
+        Create Dooty Task
     </x-slot>
 
     <x-slot name="content">
@@ -12,7 +12,7 @@
                     <img class="mx-auto w-40 sm:w-52 max-h-40 sm:max-h-52" src="{{ asset('images/marshmallow 5.png') }}" alt="Logo">
                 </div>
                 <div class="py-2 w-full xl:basis-2/3 space-y-4">
-                    <h1 class="my-2 text-text text-2xl sm:text-3xl poppins-bold">Add Tasks</h1>
+                    <h1 class="my-2 text-text text-2xl sm:text-3xl poppins-bold">Add Task</h1>
                     @php
                         $userId = Auth::id();
                     @endphp

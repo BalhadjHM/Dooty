@@ -1,6 +1,6 @@
 <x-layouts.app>
     <x-slot name="title">
-        Sign Up
+        Dooty Join | Sign Up
     </x-slot>
 
     <x-slot name="content">

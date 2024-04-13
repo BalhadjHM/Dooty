@@ -6,7 +6,7 @@
 @if($userId)
     <x-layouts.app>
         <x-slot name="title">
-            Spaces
+            Dooty Spaces
         </x-slot>
 
         <x-slot name="content">
