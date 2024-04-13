@@ -18,7 +18,7 @@
             <div
                 class="w-4/5 md:w-1/2 my-10 mx-auto py-4 md:py-6 px-4 md:px-8 flex flex-col items-center justify-center bg-background rounded-md shadow-sm">
                 <!-- Search bar -->
-                <x-search/>
+                <x-search-tasks spaceId="{{ $spaceId }}"/>
                 <!-- Create -->
                 <a href="{{ route('task.create', ['userId' => $userId, 'spaceId' => $spaceId]) }}" class="py-2 px-4 bg-accent poppins-medium text-sm rounded-md shadow">Add Task</a>
             </div>
@@ -46,13 +46,25 @@
                     <div id="task-card" data-user-id="{{ $userId }}" data-space-id="{{ $spaceId }}" data-task-id="{{ $task->id }}" class="w-full px-4 py-2 flex flex-row justify-between items-stretch gap-4 divide-x divide-slate-100 border border-slate-200 rounded-md shadow-sm cursor-pointer duration-300 ease-in-out hover:shadow hover:scale-[1.01] {{ $task->status == 0 ? 'line-through' : '' }}">
                         <div class="flex flex-col grow-0 justify-start items-start gap-2">
                             <div class="flex flex-col justify-center items-start">
-                                <h3 class="text-xs lg:text-sm text-text open-sans-semibold capitalize">{{ $task->title }}</h3>
+                                <h3 class="text-xs lg:text-sm text-text open-sans-semibold capitalize">
+                                    @if(!empty($searchTerm))
+                                        {!! str_ireplace([$searchTermLower, $searchTermUpper, $searchTermCapitalized], '<span class="px-[1px] bg-yellow-300 rounded">'.$searchTerm.'</span>', $task->title) !!}
+                                    @else
+                                        {{ $task->title }}
+                                    @endif
+                                </h3>
                                 <div class="flex flex-row items-center justify-center gap-2">
                                     <svg width="16px" height="16px" viewBox="-2.4 -2.4 28.80 28.80" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#913b3b" stroke-width="0.43200000000000005"></g><g id="SVGRepo_iconCarrier"> <path d="M7 4V2.5" stroke="#525252" stroke-width="1.5" stroke-linecap="round"></path> <path d="M17 4V2.5" stroke="#525252" stroke-width="1.5" stroke-linecap="round"></path> <path d="M9 14.5L10.5 13V17" stroke="#525252" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M13 16V14C13 13.4477 13.4477 13 14 13C14.5523 13 15 13.4477 15 14V16C15 16.5523 14.5523 17 14 17C13.4477 17 13 16.5523 13 16Z" stroke="#525252" stroke-width="1.5" stroke-linecap="round"></path> <path d="M21.5 9H16.625H10.75M2 9H5.875" stroke="#525252" stroke-width="1.5" stroke-linecap="round"></path> <path d="M14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C20.1752 21.4816 19.3001 21.7706 18 21.8985" stroke="#525252" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
                                     <p class="text-xs text-gray-600 open-sans-regular">{{ \Carbon\Carbon::parse($task->due_date)->format('D, M') . " " . \Carbon\Carbon::parse($task->due_date)->format('d') }}</p>
                                 </div>
                             </div>
-                            <p class="text-xs open-sans-regular text-justify">{{ $task->description }}</p>
+                            <p class="text-xs open-sans-regular text-justify">
+                                @if(!empty($searchTerm))
+                                    {!! str_ireplace([$searchTermLower, $searchTermUpper, $searchTermCapitalized], '<span class="px-[1px] bg-yellow-300 rounded">'.$searchTerm.'</span>', $task->description) !!}
+                                @else
+                                    {{ $task->description }}
+                                @endif
+                            </p>
                         </div>
                         <!-- Task actions-->
                         <div class="pl-3 flex flex-col gap-2 items-start">

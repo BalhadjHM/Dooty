@@ -32,7 +32,7 @@
                         {{--Title--}}
                         <h2 class="text-text text-xl md:text-2xl poppins-bold capitalize">
                             @if(!empty($searchTerm))
-                                {!! str_replace($searchTerm, '<span class="px-0.5 bg-yellow-300 rounded">'.$searchTerm.'</span>', $space->title) !!}
+                                {!! str_ireplace([$searchTermLower, $searchTermUpper, $searchTermCapitalized], '<span class="px-0.5 bg-yellow-300 rounded">'.$searchTerm.'</span>', $space->title) !!}
                             @else
                                 {{ $space->title }}
                             @endif
@@ -157,7 +157,7 @@
                         <div>
                             <p class="text-text open-sans-regular text-xs md:text-sm text-justify indent-4 whitespace-normal">
                                 @if(!empty($searchTerm))
-                                    {!! str_replace($searchTerm, '<span class="px-0.5 bg-yellow-300 rounded">'.$searchTerm.'</span>', $space->description) !!}
+                                    {!! str_ireplace([$searchTermLower, $searchTermUpper, $searchTermCapitalized], '<span class="px-0.5 bg-yellow-300 rounded">'.$searchTerm.'</span>', $space->description) !!}
                                 @else
                                     {{ $space->description }}
                                 @endif

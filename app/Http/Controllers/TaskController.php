@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Task;
+use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
@@ -122,6 +123,31 @@ class TaskController extends Controller
         // redirect to the task's index page
         return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId])
             ->with('success', 'Task deleted successfully');
+    }
+
+    // search for a task
+    public function search($userId, $spaceId){
+        // retrieve the search term
+        $searchTerm = request('search');
+        $searchTermLower = strtolower(request('search'));
+        $searchTermUpper = strtoupper(request('search'));
+        $searchTermCapitalized = ucfirst(request('search'));
+
+        // retrieve all tasks in a space that match the search term
+        $tasks = Task::where('space_id', $spaceId)
+            ->where(function($query) use ($searchTermLower, $searchTermUpper, $searchTermCapitalized) {
+                $query->where('title', 'like', '%' . $searchTermLower . '%')
+                    ->orWhere('title', 'like', '%' . $searchTermUpper . '%')
+                    ->orWhere('title', 'like', '%' . $searchTermCapitalized . '%')
+                    ->orWhere('description', 'like', '%' . $searchTermLower . '%')
+                    ->orWhere('description', 'like', '%' . $searchTermUpper . '%')
+                    ->orWhere('description', 'like', '%' . $searchTermCapitalized . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // check if tasks exist
+        return view('tasks.index', ['tasks' => $tasks, 'userId' => $userId, 'spaceId' => $spaceId, 'searchTerm' => $searchTerm, 'searchTermLower' => $searchTermLower, 'searchTermUpper' => $searchTermUpper, 'searchTermCapitalized' => $searchTermCapitalized]);
     }
 
     // add check functionality

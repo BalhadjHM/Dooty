@@ -35,7 +35,7 @@ class SpaceController extends Controller
     }
 
     // store the space details
-public function store($userId)
+    public function store($userId)
     {
         // validate the space details
         request()->validate([
@@ -144,11 +144,20 @@ public function store($userId)
     {
         // retrieve the search term
         $searchTerm = request('search');
+        $searchTermLower = strtolower(request('search'));
+        $searchTermUpper = strtoupper(request('search'));
+        $searchTermCapitalized = ucfirst(request('search'));
 
         // retrieve the user spaces
         $spaces = Space::where('user_id', $userId)
-            ->where('title', 'like', '%' . $searchTerm . '%')
-            ->orWhere('description', 'like', '%' . $searchTerm . '%')
+            ->where(function($query) use ($searchTermLower, $searchTermUpper, $searchTermCapitalized) {
+                $query->where('title', 'like', '%' . $searchTermLower . '%')
+                    ->orWhere('title', 'like', '%' . $searchTermUpper . '%')
+                    ->orWhere('title', 'like', '%' . $searchTermCapitalized . '%')
+                    ->orWhere('description', 'like', '%' . $searchTermLower . '%')
+                    ->orWhere('description', 'like', '%' . $searchTermUpper . '%')
+                    ->orWhere('description', 'like', '%' . $searchTermCapitalized . '%');
+            })
             ->orderBy('pinned', 'desc')
             ->get();
 
@@ -159,7 +168,7 @@ public function store($userId)
         }
 
         // return the user spaces
-        return view('Spaces.index', ['spaces' => $spaces, 'searchTerm' => $searchTerm]);
+        return view('Spaces.index', ['spaces' => $spaces, 'searchTerm' => $searchTerm, 'searchTermLower' => $searchTermLower, 'searchTermUpper' => $searchTermUpper, 'searchTermCapitalized' => $searchTermCapitalized]);
     }
 
     // pin the spaces
