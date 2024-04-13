@@ -11,6 +11,8 @@ class TaskController extends Controller
     public function index($userId, $spaceId){
         //retrieve all tasks in a space
         $tasks = Task::where('space_id', $spaceId)
+            ->orderBy('status', 'desc')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         //check if tasks exist
@@ -51,6 +53,45 @@ class TaskController extends Controller
             'due_date' => $due_date,
             'space_id' => $spaceId,
         ]);
+
+        // redirect to the task's index page
+        return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId]);
+    }
+
+    // add check functionality
+    public function check($userId, $spaceId, $taskId){
+        // retrieve the task
+        $task = Task::find($taskId);
+
+        // update the task
+        $task->status = 0;
+        $task->save();
+
+        // redirect to the task's index page
+        return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId]);
+    }
+
+    // add star functionality
+    public function star($userId, $spaceId, $taskId){
+        // retrieve the task
+        $task = Task::find($taskId);
+
+        // update the task
+        $task->status = 2;
+        $task->save();
+
+        // redirect to the task's index page
+        return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId]);
+    }
+
+    // remove star functionality
+    public function unstar($userId, $spaceId, $taskId){
+        // retrieve the task
+        $task = Task::find($taskId);
+
+        // update the task
+        $task->status = 1;
+        $task->save();
 
         // redirect to the task's index page
         return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId]);
