@@ -54,7 +54,64 @@ class TaskController extends Controller
         ]);
 
         // redirect to the task's index page
-        return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId]);
+        return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId])
+            ->with('success', 'Task created successfully');
+    }
+
+    // display the form to edit a task
+    public function edit($userId, $spaceId, $taskId){
+        // retrieve the task
+        $task = Task::find($taskId);
+
+        // check if the task exists
+        if(!$task){
+            return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId])
+                ->withErrors(['error' => 'Task not found']);
+        }
+
+        return view('tasks.edit', ['task' => $task, 'userId' => $userId, 'spaceId' => $spaceId]);
+    }
+
+    // update a task
+    public function update($userId, $spaceId, $taskId){
+        // retrieve the task
+        $task = Task::find($taskId);
+
+        // check if the task exists
+        if(!$task){
+            return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId])
+                ->withError('error', 'Task not found');
+        }
+
+        //validate data of the form
+        $data = request()->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'due_date' => ['required', 'date'],
+        ], [
+            'title.required' => 'The title field is required',
+            'title.string' => 'The title field must be a string',
+            'title.max' => 'The title field must not exceed 255 characters',
+            'description.required' => 'The description field is required',
+            'description.string' => 'The description field must be a string',
+            'due_date.required' => 'The due date field is required',
+            'due_date.date' => 'The due date field must be a date',
+        ]);
+
+        // retrieve the data from the form
+        $title = request('title');
+        $description = request('description');
+        $due_date = request('due_date');
+
+        // update the task
+        $task->title = $title;
+        $task->description = $description;
+        $task->due_date = $due_date;
+        $task->save();
+
+        // redirect to the task's index page
+        return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId])
+            ->with('success', 'Task updated successfully');
     }
 
     // delete a task
@@ -63,7 +120,8 @@ class TaskController extends Controller
         Task::destroy($taskId);
 
         // redirect to the task's index page
-        return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId]);
+        return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId])
+            ->with('success', 'Task deleted successfully');
     }
 
     // add check functionality
