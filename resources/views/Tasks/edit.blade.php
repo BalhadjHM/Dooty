@@ -1,3 +1,8 @@
+@php
+    use Illuminate\Support\Facades\Auth;
+    $userId = Auth::id();
+@endphp
+
 <x-layouts.app>
     <x-slot name="title">
         Edit Dooty Task
@@ -13,9 +18,6 @@
                 </div>
                 <div class="py-2 w-full xl:basis-2/3 space-y-4">
                     <h1 class="my-2 text-text text-2xl sm:text-3xl poppins-bold">Edit Task</h1>
-                    @php
-                        $userId = Auth::id();
-                    @endphp
                     <form action="{{ route('task.update', ['userId' => $userId, 'spaceId' => $spaceId, 'taskId' => $task->id]) }}" method="POST" class="space-y-2 md:space-y-2">
                         @csrf
                         @method('PUT')

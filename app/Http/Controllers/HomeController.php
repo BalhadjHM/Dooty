@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use App\Models\User;
 
 class HomeController extends Controller
@@ -48,7 +46,7 @@ class HomeController extends Controller
         $password = request('password');
 
         // store the user details
-        $user = User::create([
+        User::create([
             'name' => $name,
             'email' => $email,
             'password' => bcrypt($password)

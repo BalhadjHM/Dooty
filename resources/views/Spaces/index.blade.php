@@ -77,7 +77,7 @@
                                         <button type="submit" class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-accent focus:outline-none focus:bg-gray-200">
                                             <svg width="20px" height="20px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg" stroke="#000000"
-                                                 stroke-width="0.00024000000000000003" transform="rotate(0)">
+                                                 stroke-width="0.00024000000000000003">
                                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
                                                    stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.048"></g>

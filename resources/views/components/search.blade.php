@@ -1,7 +1,8 @@
  <!-- SearchBox -->
  @php
+     use Illuminate\Support\Facades\Auth;
      $userId = Auth::id();
-        $searchTerm = request()->query('search');
+     $searchTerm = request()->query('search');
  @endphp
 
  @if($userId)
@@ -13,11 +14,11 @@
                      <path d="m21 21-4.3-4.3"></path>
                  </svg>
              </div>
-             <input type="text" name="search" value="{{ $searchTerm ?? '' }}" placeholder="Search for a Space title or description" class="w-full md:w-64 py-3 ps-10 pe-4 block border-secondary rounded-md text-sm focus:border-accent focus:ring-accent disabled:opacity-50 disabled:pointer-events-none">
+             <input aria-label="search" type="text" name="search" value="{{ $searchTerm ?? '' }}" placeholder="Search for a Space title or description" class="w-full md:w-64 py-3 ps-10 pe-4 block border-secondary rounded-md text-sm focus:border-accent focus:ring-accent disabled:opacity-50 disabled:pointer-events-none">
          </div>
          <button type="submit" class="py-2 px-4 bg-accent poppins-medium text-sm rounded-md shadow">Search</button>
      </form>
  @else
-     <!-- Redirect to login-->
+     <!-- Redirect to log in-->
      {{ redirect()->route('user.login') }}
  @endif

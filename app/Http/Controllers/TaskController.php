@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Task;
-use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
@@ -12,6 +10,7 @@ class TaskController extends Controller
     public function index($userId, $spaceId){
         //retrieve all tasks in a space
         $tasks = Task::where('space_id', $spaceId)
+            ->orderBy('status', 'desc')
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -27,7 +26,7 @@ class TaskController extends Controller
     // store a new task
     public function store($userId, $spaceId){
         //validate data of the form
-        $data = request()->validate([
+        request()->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'due_date' => ['required', 'date'],
@@ -47,7 +46,7 @@ class TaskController extends Controller
         $due_date = request('due_date');
 
         // create a new task
-        $task = Task::create([
+        Task::create([
             'title' => $title,
             'description' => $description,
             'due_date' => $due_date,
@@ -85,7 +84,7 @@ class TaskController extends Controller
         }
 
         //validate data of the form
-        $data = request()->validate([
+        request()->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'due_date' => ['required', 'date'],

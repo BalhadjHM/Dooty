@@ -50,17 +50,8 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
 
-        // Get a reference to the dropdown menu
-        let dropdown = document.getElementById("dropdown");
-
-        if (dropdown) { // Check if the element exists
-            // Stop propagation of click event on the dropdown menu
-            dropdown.addEventListener("click", function(event) {
-                event.stopPropagation();
-            });
-        }
-
-    // Get a reference to the task card element
+    // Check and uncheck tasks when click on the task card
+        // Get a reference to the task card element
         let task = document.getElementById("task-card");
 
         if (task) { // Check if the element exists
@@ -92,7 +83,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                 })
                 .then(response => response.json())
-                .then(data => {})
                 .catch((error) => {
                     console.error('Error:', error);
                 });
@@ -100,11 +90,11 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // Get a reference to the dropdown menu
-        let dropdown_two = document.getElementById("dropdown-two");
+        let dropdown = document.getElementById("dropdown");
 
-        if (dropdown_two) { // Check if the element exists
+        if (dropdown) { // Check if the element exists
             // Stop propagation of click event on the dropdown menu
-            dropdown_two.addEventListener("click", function(event) {
+            dropdown.addEventListener("click", function(event) {
                 event.stopPropagation();
             });
         }

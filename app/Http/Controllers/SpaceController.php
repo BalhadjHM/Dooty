@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Space;
 
@@ -31,7 +30,7 @@ class SpaceController extends Controller
     // display the form to create a new space
     public function create($userId)
     {
-        return view('Spaces.create');
+        return view('Spaces.create', ['userId' => $userId]);
     }
 
     // store the space details
@@ -57,7 +56,6 @@ class SpaceController extends Controller
         $title = request('title');
         $description = request('description');
         $tags = json_decode(request('tagsArray'), true);
-        $userId = Auth::id();
 
         // store the space details
         $space = Space::create([
@@ -68,7 +66,7 @@ class SpaceController extends Controller
 
         // store the tags in the tag table
         foreach($tags as $tag) {
-            $tag = Tag::create([
+            Tag::create([
                 'name' => $tag,
                 'space_id' => $space->id
             ]);
@@ -119,7 +117,7 @@ class SpaceController extends Controller
 
         // store the tags in the tag table
         foreach($tags as $tag) {
-            $tag = Tag::create([
+            Tag::create([
                 'name' => $tag,
                 'space_id' => $spaceId
             ]);
