@@ -20,9 +20,29 @@
                 class="w-4/5 md:w-1/2 my-10 mx-auto py-4 md:py-6 px-4 md:px-8 flex flex-col items-center justify-center bg-background rounded-md shadow-sm">
                 <!-- Search bar -->
                 <x-search/>
-                <!-- Create -->
-                <a href="{{ route('space.create', ['userId' => $userId]) }}"
+                <div class="flex lg:flex-row items-stretch gap-2">
+                    <!-- back -->
+                    <x-popover>
+                        <a href="{{ route('user.login', ['userId' => $userId]) }}" class="size-8 md:size-9 flex justify-center items-center bg-gray-50 text-sm font-semibold rounded-lg border border-gray-200 bg-b text-gray-800 shadow-sm duration-300 ease-in-out hover:bg-accent disabled:opacity-50 disabled:pointer-events-none">
+                            <svg width="20px" height="20px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.048"></g><g id="SVGRepo_iconCarrier"> <path d="M4 10L3.29289 10.7071L2.58579 10L3.29289 9.29289L4 10ZM21 18C21 18.5523 20.5523 19 20 19C19.4477 19 19 18.5523 19 18L21 18ZM8.29289 15.7071L3.29289 10.7071L4.70711 9.29289L9.70711 14.2929L8.29289 15.7071ZM3.29289 9.29289L8.29289 4.29289L9.70711 5.70711L4.70711 10.7071L3.29289 9.29289ZM4 9L14 9L14 11L4 11L4 9ZM21 16L21 18L19 18L19 16L21 16ZM14 9C17.866 9 21 12.134 21 16L19 16C19 13.2386 16.7614 11 14 11L14 9Z" fill="#000000"></path> </g></svg>
+                        </a>
+                        <x-slot name="message">
+                            Back to login
+                        </x-slot>
+                    </x-popover>
+                    <!-- Home Page -->
+                    <x-popover>
+                        <a href="{{ route('user.index', ['userId' => $userId]) }}" class="size-8 md:size-9 flex justify-center items-center bg-gray-50 text-sm font-semibold rounded-lg border border-gray-200 bg-b text-gray-800 shadow-sm duration-300 ease-in-out hover:bg-accent disabled:opacity-50 disabled:pointer-events-none">
+                            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M22 12.2039V13.725C22 17.6258 22 19.5763 20.8284 20.7881C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.7881C2 19.5763 2 17.6258 2 13.725V12.2039C2 9.91549 2 8.77128 2.5192 7.82274C3.0384 6.87421 3.98695 6.28551 5.88403 5.10813L7.88403 3.86687C9.88939 2.62229 10.8921 2 12 2C13.1079 2 14.1106 2.62229 16.116 3.86687L18.116 5.10812C20.0131 6.28551 20.9616 6.87421 21.4808 7.82274" stroke="#000" stroke-width="1.5" stroke-linecap="round"></path> <path d="M15 18H9" stroke="#000" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+                        </a>
+                        <x-slot name="message">
+                            Home
+                        </x-slot>
+                    </x-popover>
+                    <!-- Create -->
+                    <a href="{{ route('space.create', ['userId' => $userId]) }}"
                    class="py-2 px-4 bg-accent poppins-medium text-sm rounded-md shadow">Create a Space</a>
+                </div>
             </div>
 
             <!-- Spaces -->
