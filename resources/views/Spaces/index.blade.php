@@ -19,7 +19,7 @@
 
             <x-container class="flex flex-col items-center justify-center">
                 <!-- Search bar -->
-                <x-search/>
+                <x-search :tagName="$tagName ?? null" />
                 <div class="flex lg:flex-row items-stretch gap-2">
                     <!-- back -->
                     <x-popover>
@@ -178,7 +178,9 @@
                         <!-- tags -->
                         <div class="flex justify-start items-center flex-wrap gap-1">
                             @foreach($space->tags as $tag)
-                                <a href="#" class="py-1 px-2 text-text open-sans-medium text-xs bg-secondary rounded-full">{{ $tag->name }}</a>
+                                <x-tag :routeName="'space.searchTag'" :routeParam="['userId' => $userId, 'tagId' => $tag->id]">
+                                    {{ $tag->name }}
+                                </x-tag>
                             @endforeach
                         </div>
                         <div class="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 sm:gap-0">

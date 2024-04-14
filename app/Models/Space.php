@@ -20,4 +20,9 @@ class Space extends Model
         'user_id',
         'pinned'
     ];
+
+    public function tags()
+    {
+        return $this->hasMany(Tag::class);
+    }
 }

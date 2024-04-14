@@ -172,6 +172,30 @@ class SpaceController extends Controller
         return view('Spaces.index', ['spaces' => $spaces, 'searchTerm' => $searchTerm, 'searchTermLower' => $searchTermLower, 'searchTermUpper' => $searchTermUpper, 'searchTermCapitalized' => $searchTermCapitalized]);
     }
 
+    // search for a tag name and return the spaces
+    public function searchTag($userId, $tagId)
+    {
+        // retrieve the tag name
+        $tagName = Tag::find($tagId)->name;
+
+        // retrieve the user spaces
+        $spaces = Space::where('user_id', $userId)
+            ->whereHas('tags', function($query) use ($tagName) {
+                $query->where('name', $tagName);
+            })
+            ->orderBy('pinned', 'desc')
+            ->get();
+
+        // retrieve the tags for each space
+        foreach($spaces as $space) {
+            $tags = Tag::where('space_id', $space->id)->get();
+            $space->tags = $tags;
+        }
+
+        // return the user spaces
+        return view('Spaces.index', ['spaces' => $spaces, 'tagName' => $tagName]);
+    }
+
     // pin the spaces
     public function pin($userId, $spaceId)
     {

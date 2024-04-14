@@ -21,6 +21,7 @@ Route::get('/dashboard/{userId}/edit/{spaceId}', [SpaceController::class , 'edit
 Route::put('/dashboard/{userId}/{spaceId}', [SpaceController::class , 'update'])->name('space.update');
 Route::delete('/dashboard/{userId}/{spaceId}', [SpaceController::class , 'destroy'])->name('space.destroy');
 Route::get('/dashboard/{userId}/search', [SpaceController::class , 'search'])->name('space.search');
+Route::get('/dashboard/{userId}/searchTag/{tagId}', [SpaceController::class , 'searchTag'])->name('space.searchTag');
 Route::get('/dashboard/{userId}/tag/{tagId}', [SpaceController::class , 'tag'])->name('space.tag');
 Route::put('/dashboard/{userId}/pin/{spaceId}', [SpaceController::class , 'pin'])->name('space.pin');
 Route::put('/dashboard/{userId}/unpin/{spaceId}', [SpaceController::class , 'unpin'])->name('space.unpin');

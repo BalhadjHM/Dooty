@@ -1,4 +1,5 @@
  <!-- SearchBox -->
+ @props(['tagName'])
  @php
      use Illuminate\Support\Facades\Auth;
      $userId = Auth::id();
@@ -14,7 +15,16 @@
                      <path d="m21 21-4.3-4.3"></path>
                  </svg>
              </div>
-             <input aria-label="search" type="text" name="search" value="{{ $searchTerm ?? '' }}" placeholder="Search for a Space title or description" class="w-full md:w-64 py-3 ps-10 pe-4 block border-secondary rounded-md text-sm focus:border-accent focus:ring-accent disabled:opacity-50 disabled:pointer-events-none">
+                 @if($tagName)
+                     <div class="relative">
+                         <input aria-label="search" type="text" name="search" value="{{ $searchTerm ?? '' }}" placeholder="" class="w-full md:w-64 py-3 ps-10 pe-4 block border-secondary rounded-md text-sm focus:border-accent focus:ring-accent disabled:opacity-50 disabled:pointer-events-none">
+                         <div class="absolute left-9 top-1/2 transform -translate-y-1/2 py-1 px-2 text-text open-sans-medium text-xs bg-secondary rounded-full hover:ring-accent hover:ring-1">
+                             {{ $tagName }}
+                         </div>
+                     </div>
+                 @else
+                     <input aria-label="search" type="text" name="search" value="{{ $searchTerm ?? '' }}" placeholder="Search for a Space title or description" class="w-full md:w-64 py-3 ps-10 pe-4 block border-secondary rounded-md text-sm focus:border-accent focus:ring-accent disabled:opacity-50 disabled:pointer-events-none">
+                 @endif
          </div>
          <button type="submit" class="py-2 px-4 bg-accent poppins-medium text-sm rounded-md shadow">Search</button>
      </form>
