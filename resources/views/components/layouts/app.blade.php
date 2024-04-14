@@ -39,7 +39,7 @@
         <title>{{ $title ?? 'Dooty' }}</title>
     </head>
 
-    <body class="bg-secondary">
+    <body class="bg-secondary relative">
         {{--main--}}
         {{ $content }}
 

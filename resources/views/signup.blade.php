@@ -5,6 +5,7 @@
 
     <x-slot name="content">
         <x-alert />
+
         <x-container>
             <x-form-container>
                 <x-slot name="image">

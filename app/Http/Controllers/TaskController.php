@@ -78,12 +78,6 @@ class TaskController extends Controller
         // retrieve the task
         $task = Task::find($taskId);
 
-        // check if the task exists
-        if(!$task){
-            return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId])
-                ->withError('error', 'Task not found');
-        }
-
         //validate data of the form
         request()->validate([
             'title' => ['required', 'string', 'max:255'],

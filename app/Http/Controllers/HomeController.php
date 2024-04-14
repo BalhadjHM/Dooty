@@ -53,7 +53,7 @@ class HomeController extends Controller
         ]);
 
         // redirect to the login page
-        return redirect()->route('user.login');
+        return redirect()->route('user.login', ['name' => $name])->with(['success' => 'You have successfully created an account.']);
     }
 
     // display the login page
@@ -90,6 +90,6 @@ class HomeController extends Controller
         }
 
         // redirect to the login page
-        return redirect()->route('user.login')->withErrors(['error' => 'Invalid email or password.']);
+        return redirect()->route('user.login')->withErrors(['error' => 'Invalid email or password, please try again.']);
     }
 }

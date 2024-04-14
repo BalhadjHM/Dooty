@@ -73,7 +73,7 @@ class SpaceController extends Controller
         }
 
         // redirect to the user dashboard
-        return redirect()->route('user.index', ['userId' => $userId]);
+        return redirect()->route('user.index', ['userId' => $userId])->with('success', 'Space created successfully');
     }
 
     // display the edit form
@@ -127,7 +127,7 @@ class SpaceController extends Controller
         }
 
         // redirect to the user dashboard
-        return redirect()->route('user.index', ['userId' => $userId]);
+        return redirect()->route('user.index', ['userId' => $userId])->with('success', 'Space updated successfully');
     }
 
     // delete the space
@@ -137,7 +137,7 @@ class SpaceController extends Controller
         Space::destroy($spaceId);
 
         // redirect to the user dashboard
-        return redirect()->route('user.index', ['userId' => $userId]);
+        return redirect()->route('user.index', ['userId' => $userId])->with('success', 'Space deleted successfully');
     }
 
     // search for a space

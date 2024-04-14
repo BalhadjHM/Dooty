@@ -4,7 +4,12 @@
     </x-slot>
 
     <x-slot name="content">
+        <!-- Alert message -->
         <x-alert />
+
+        <!-- success message -->
+        <x-success />
+
         <x-container>
             <x-form-container>
                 <x-slot name="image">
