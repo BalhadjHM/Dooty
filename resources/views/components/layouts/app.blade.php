@@ -40,9 +40,12 @@
     </head>
 
     <body class="bg-secondary">
+        {{--main--}}
         {{ $content }}
+
+        {{--Footer--}}
         <footer>
-            <div class="w-4/5 md:w-1/2 my-10 mx-auto py-4 md:py-6 px-4 md:px-8 bg-background rounded-md shadow-sm">
+            <x-container>
                 <div class="flex flex-col lg:flex-row justify-between items-center gap-y-2 text-xs lg:text-sm">
                     <p class="open-sans-medium text-text">© 2024 Dooty. All rights reserved.</p>
                     <div class="flex gap-4">
@@ -50,7 +53,7 @@
                         <a href="#" class="text-text open-sans-semibold">Terms of Service</a>
                     </div>
                 </div>
-            </div>
+            </x-container>
         </footer>
     </body>
 </html>

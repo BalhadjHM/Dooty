@@ -79,7 +79,10 @@ class SpaceController extends Controller
     // display the edit form
     public function edit($userId, $spaceId)
     {
-        return view('Spaces.edit', ['spaceId' => $spaceId, 'userId' => $userId]);
+        // retrieve the space details
+        $space = Space::find($spaceId);
+
+        return view('Spaces.edit', ['spaceId' => $spaceId, 'userId' => $userId, 'space' => $space]);
     }
 
     // update the space details
