@@ -54,24 +54,28 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
     // Check and uncheck tasks when click on the task card
-        // Get a reference to all task card elements
-        let tasks = document.querySelectorAll("[data-task-id]");
+        // Get a reference to the container that holds all tasks
+        let taskContainer = document.getElementById('taskContainer');
 
-        // Loop through all tasks
-        tasks.forEach((task) => {
-            task.addEventListener('click', function() {
+        // Attach click event listener to the container
+        taskContainer.addEventListener('click', function(event) {
+            // Check if the clicked element or its parent is a task card
+            let task = event.target.closest("[data-task-id]");
+            if (task) {
+                // Get the task ID, user ID, space ID, and status from the data-* attributes
                 const taskId = task.getAttribute('data-task-id');
                 const userId = task.getAttribute('data-user-id');
                 const spaceId = task.getAttribute('data-space-id');
                 let status = task.getAttribute('data-task-status');
+                let parent = task.parentElement;
                 let url = '';
 
                 // Depending on the status of the task, call the appropriate API endpoint
                 if (status !== '0') {
-                    task.classList.add('checked');
+                    parent.classList.add('checked');
                     url = `/dashboard/${userId}/${spaceId}/check/${taskId}`;
                 } else {
-                    task.classList.remove('checked');
+                    parent.classList.remove('checked');
                     url = `/dashboard/${userId}/${spaceId}/uncheck/${taskId}`;
                 }
 
@@ -92,16 +96,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 .catch((error) => {
                     console.error('Error:', error);
                 });
-            });
+            }
         });
 
-        // Get a reference to the dropdown menu
-        let dropdown = document.getElementById("dropdown");
-
-        if (dropdown) { // Check if the element exists
-            // Stop propagation of click event on the dropdown menu
-            dropdown.addEventListener("click", function(event) {
+        // Get a reference to the dropdown menu and the star and unstar buttons
+        document.querySelectorAll('.hs-dropdown-menu, .hs-dropdown-toggle, .hs-dropdown, .hs-dropdown-btn, .star, .unstar').forEach(function(element) {
+            element.addEventListener('click', function(event) {
                 event.stopPropagation();
             });
-        }
+        });
 });

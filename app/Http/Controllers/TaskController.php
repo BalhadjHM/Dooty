@@ -147,27 +147,39 @@ class TaskController extends Controller
     // add check functionality
     public function check($userId, $spaceId, $taskId){
         // retrieve the task
-        $task = Task::find($taskId);
+        $task = Task::where('id', $taskId)->first();
+
+        // check if the task exists
+        if(!$task){
+            return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId, 'taskId' => $taskId])
+                ->withErrors(['error' => 'Task not found']);
+        }
 
         // update the task
         $task->status = 0;
         $task->save();
 
         // redirect to the task's index page
-        return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId]);
+        return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId, 'taskId' => $taskId]);
     }
 
     // remove check functionality
     public function uncheck($userId, $spaceId, $taskId){
         // retrieve the task
-        $task = Task::find($taskId);
+        $task = Task::where('id', $taskId)->first();
+
+        // check if the task exists
+        if(!$task){
+            return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId, 'taskId' => $taskId])
+                ->withErrors(['error' => 'Task not found']);
+        }
 
         // update the task
         $task->status = 1;
         $task->save();
 
         // redirect to the task's index page
-        return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId]);
+        return redirect()->route('task.index', ['userId' => $userId, 'spaceId' => $spaceId, 'taskId' => $taskId]);
     }
 
     // add star functionality
