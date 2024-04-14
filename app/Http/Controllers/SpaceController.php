@@ -76,13 +76,24 @@ class SpaceController extends Controller
         return redirect()->route('user.index', ['userId' => $userId])->with('success', 'Space created successfully');
     }
 
-    // display the edit form
-    public function edit($userId, $spaceId)
-    {
-        // retrieve the space details
+    // display the form to edit a space
+    public function edit($userId, $spaceId){
+        // retrieve the space
         $space = Space::find($spaceId);
 
-        return view('Spaces.edit', ['spaceId' => $spaceId, 'userId' => $userId, 'space' => $space]);
+        // retrieve the tags for the space
+        $tags = Tag::where('space_id', $space->id)->get();
+
+        // convert the tags to a JSON string
+        $tagsJson = json_encode($tags->pluck('name'));
+
+        // check if the space exists
+        if(!$space){
+            return redirect()->route('space.index', ['userId' => $userId])
+                ->withErrors(['error' => 'Space not found']);
+        }
+
+        return view('Spaces.edit', ['space' => $space, 'tags' => $tagsJson, 'userId' => $userId, 'spaceId' => $spaceId]);
     }
 
     // update the space details

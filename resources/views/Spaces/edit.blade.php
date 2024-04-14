@@ -21,7 +21,7 @@
                     Edit Space
                 </x-slot>
                 <x-slot name="form">
-                    <form action="{{ route('space.update', ['userId' => $userId, 'spaceId' => $spaceId]) }}" method="POST" class="space-y-2 md:space-y-2">
+                    <form action="{{ route('space.update', ['userId' => $userId, 'spaceId' => $space->id]) }}" method="POST" class="space-y-2 md:space-y-2">
                         @csrf
                         @method('PUT')
                         <x-input label="Title" name="title" type="text" value="{{ $space->title }}"/>
