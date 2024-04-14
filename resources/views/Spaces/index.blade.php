@@ -21,15 +21,6 @@
                 <!-- Search bar -->
                 <x-search :tagName="$tagName ?? null" />
                 <div class="flex lg:flex-row items-stretch gap-2">
-                    <!-- back -->
-                    <x-popover>
-                        <a href="{{ route('user.login', ['userId' => $userId]) }}" class="size-8 md:size-9 flex justify-center items-center bg-gray-50 text-sm font-semibold rounded-lg border border-gray-200 bg-b text-gray-800 shadow-sm duration-300 ease-in-out hover:bg-accent disabled:opacity-50 disabled:pointer-events-none">
-                            <svg width="20px" height="20px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.048"></g><g id="SVGRepo_iconCarrier"> <path d="M4 10L3.29289 10.7071L2.58579 10L3.29289 9.29289L4 10ZM21 18C21 18.5523 20.5523 19 20 19C19.4477 19 19 18.5523 19 18L21 18ZM8.29289 15.7071L3.29289 10.7071L4.70711 9.29289L9.70711 14.2929L8.29289 15.7071ZM3.29289 9.29289L8.29289 4.29289L9.70711 5.70711L4.70711 10.7071L3.29289 9.29289ZM4 9L14 9L14 11L4 11L4 9ZM21 16L21 18L19 18L19 16L21 16ZM14 9C17.866 9 21 12.134 21 16L19 16C19 13.2386 16.7614 11 14 11L14 9Z" fill="#000000"></path> </g></svg>
-                        </a>
-                        <x-slot name="message">
-                            Back to login
-                        </x-slot>
-                    </x-popover>
                     <!-- Home Page -->
                     <x-popover>
                         <a href="{{ route('user.index', ['userId' => $userId]) }}" class="size-8 md:size-9 flex justify-center items-center bg-gray-50 text-sm font-semibold rounded-lg border border-gray-200 bg-b text-gray-800 shadow-sm duration-300 ease-in-out hover:bg-accent disabled:opacity-50 disabled:pointer-events-none">
@@ -37,6 +28,15 @@
                         </a>
                         <x-slot name="message">
                             Home
+                        </x-slot>
+                    </x-popover>
+                    <!-- Logout -->
+                    <x-popover>
+                        <a href="{{ route('user.login', ['userId' => $userId]) }}" class="size-8 md:size-9 flex justify-center items-center bg-gray-50 text-sm font-semibold rounded-lg border border-gray-200 bg-b text-gray-800 shadow-sm duration-300 ease-in-out hover:bg-accent disabled:opacity-50 disabled:pointer-events-none">
+                            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9.00195 7C9.01406 4.82497 9.11051 3.64706 9.87889 2.87868C10.7576 2 12.1718 2 15.0002 2L16.0002 2C18.8286 2 20.2429 2 21.1215 2.87868C22.0002 3.75736 22.0002 5.17157 22.0002 8L22.0002 16C22.0002 18.8284 22.0002 20.2426 21.1215 21.1213C20.2429 22 18.8286 22 16.0002 22H15.0002C12.1718 22 10.7576 22 9.87889 21.1213C9.11051 20.3529 9.01406 19.175 9.00195 17" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path> <path d="M15 12L2 12M2 12L5.5 9M2 12L5.5 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                        </a>
+                        <x-slot name="message">
+                            Logout
                         </x-slot>
                     </x-popover>
                     <!-- Create -->

@@ -20,6 +20,15 @@
                 <!-- Search bar -->
                 <x-search-tasks spaceId="{{ $spaceId }}"/>
                 <div class="flex lg:flex-row items-stretch gap-2">
+                    <!-- Home Page -->
+                    <x-popover>
+                        <a href="{{ route('task.index', ['userId' => $userId, 'spaceId' => $spaceId]) }}" class="size-8 md:size-9 flex justify-center items-center bg-gray-50 text-sm font-semibold rounded-lg border border-gray-200 bg-b text-gray-800 shadow-sm duration-300 ease-in-out hover:bg-accent disabled:opacity-50 disabled:pointer-events-none">
+                            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M22 12.2039V13.725C22 17.6258 22 19.5763 20.8284 20.7881C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.7881C2 19.5763 2 17.6258 2 13.725V12.2039C2 9.91549 2 8.77128 2.5192 7.82274C3.0384 6.87421 3.98695 6.28551 5.88403 5.10813L7.88403 3.86687C9.88939 2.62229 10.8921 2 12 2C13.1079 2 14.1106 2.62229 16.116 3.86687L18.116 5.10812C20.0131 6.28551 20.9616 6.87421 21.4808 7.82274" stroke="#000" stroke-width="1.5" stroke-linecap="round"></path> <path d="M15 18H9" stroke="#000" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+                        </a>
+                        <x-slot name="message">
+                            Home
+                        </x-slot>
+                    </x-popover>
                     <!-- back -->
                     <x-popover>
                         <a href="{{ route('user.index', ['userId' => $userId]) }}" class="hs-tooltip-toggle size-8 md:size-9 flex justify-center items-center bg-gray-50 text-sm font-semibold rounded-lg border border-gray-200 bg-b text-gray-800 shadow-sm duration-300 ease-in-out hover:bg-accent disabled:opacity-50 disabled:pointer-events-none">
@@ -29,13 +38,13 @@
                             Back to spaces
                         </x-slot>
                     </x-popover>
-                    <!-- Home Page -->
+                    <!-- Logout -->
                     <x-popover>
-                        <a href="{{ route('task.index', ['userId' => $userId, 'spaceId' => $spaceId]) }}" class="size-8 md:size-9 flex justify-center items-center bg-gray-50 text-sm font-semibold rounded-lg border border-gray-200 bg-b text-gray-800 shadow-sm duration-300 ease-in-out hover:bg-accent disabled:opacity-50 disabled:pointer-events-none">
-                            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M22 12.2039V13.725C22 17.6258 22 19.5763 20.8284 20.7881C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.7881C2 19.5763 2 17.6258 2 13.725V12.2039C2 9.91549 2 8.77128 2.5192 7.82274C3.0384 6.87421 3.98695 6.28551 5.88403 5.10813L7.88403 3.86687C9.88939 2.62229 10.8921 2 12 2C13.1079 2 14.1106 2.62229 16.116 3.86687L18.116 5.10812C20.0131 6.28551 20.9616 6.87421 21.4808 7.82274" stroke="#000" stroke-width="1.5" stroke-linecap="round"></path> <path d="M15 18H9" stroke="#000" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+                        <a href="{{ route('user.login', ['userId' => $userId]) }}" class="size-8 md:size-9 flex justify-center items-center bg-gray-50 text-sm font-semibold rounded-lg border border-gray-200 bg-b text-gray-800 shadow-sm duration-300 ease-in-out hover:bg-accent disabled:opacity-50 disabled:pointer-events-none">
+                            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9.00195 7C9.01406 4.82497 9.11051 3.64706 9.87889 2.87868C10.7576 2 12.1718 2 15.0002 2L16.0002 2C18.8286 2 20.2429 2 21.1215 2.87868C22.0002 3.75736 22.0002 5.17157 22.0002 8L22.0002 16C22.0002 18.8284 22.0002 20.2426 21.1215 21.1213C20.2429 22 18.8286 22 16.0002 22H15.0002C12.1718 22 10.7576 22 9.87889 21.1213C9.11051 20.3529 9.01406 19.175 9.00195 17" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path> <path d="M15 12L2 12M2 12L5.5 9M2 12L5.5 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                         </a>
                         <x-slot name="message">
-                            Home
+                            Logout
                         </x-slot>
                     </x-popover>
                     <!-- Create -->
