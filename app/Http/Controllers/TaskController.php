@@ -14,6 +14,14 @@ class TaskController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
+        // check if the task is passed the due date
+        foreach($tasks as $task){
+            if($task->due_date < date('Y-m-d')){
+                $task->status = 3;
+                $task->save();
+            }
+        }
+
         //check if tasks exist
         return view('tasks.index', ['tasks' => $tasks, 'userId' => $userId, 'spaceId' => $spaceId]);
     }

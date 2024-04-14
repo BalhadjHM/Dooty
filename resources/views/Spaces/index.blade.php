@@ -51,10 +51,10 @@
                 </x-container>
             @endif
             @foreach($spaces as $space)
-                <x-container id="space-card" data-space-card data-user-id="{{ $userId }}" data-space-id="{{ $space->id }}" class="cursor-pointer duration-300 ease-in-out hover:scale-[1.02]">
+                <x-container class="cursor-pointer duration-300 ease-in-out hover:scale-[1.02]">
                     <div class="mb-4 pb-4 flex justify-between items-center border-b-2 border-accent">
                         {{--Title--}}
-                        <h2 class="text-text text-xl md:text-2xl poppins-bold capitalize">
+                        <h2 id="space-card" data-space-card data-user-id="{{ $userId }}" data-space-id="{{ $space->id }}" class="w-full text-text text-xl md:text-2xl poppins-bold capitalize">
                             @if(!empty($searchTerm))
                                 {!! str_ireplace([$searchTermLower, $searchTermUpper, $searchTermCapitalized], '<span class="px-0.5 bg-yellow-300 rounded">'.$searchTerm.'</span>', $space->title) !!}
                             @else
@@ -64,7 +64,7 @@
                         {{--Dropdown menu--}}
                         <x-dropdown>
                             @if($space->pinned == 0)
-                                <form action="{{ route('space.pin', ['userId' => $userId, 'spaceId' => $space->id]) }}" method="post" class="m-0">
+                                <form action="{{ route('space.pin', ['userId' => $userId, 'spaceId' => $space->id]) }}" method="post" class="hs-dropdown-btn m-0">
                                     @csrf
                                     @method('PUT')
                                     <button type="submit" class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-accent focus:outline-none focus:bg-gray-200">
@@ -87,7 +87,7 @@
                                     </button>
                                 </form>
                             @elseif($space->pinned == 1)
-                                <form action="{{ route('space.unpin', ['userId' => $userId, 'spaceId' => $space->id]) }}" method="post" class="m-0">
+                                <form action="{{ route('space.unpin', ['userId' => $userId, 'spaceId' => $space->id]) }}" method="post" class="hs-dropdown-btn m-0">
                                     @csrf
                                     @method('PUT')
                                     <button type="submit" class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-accent focus:outline-none focus:bg-gray-200">
@@ -116,7 +116,7 @@
                                 </form>
                             @endif
                             <hr class="border-gray-200">
-                            <a href="{{ route('space.edit', ['userId' => $userId, 'spaceId' => $space->id]) }}" class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-accent focus:outline-none focus:bg-gray-200">
+                            <a href="{{ route('space.edit', ['userId' => $userId, 'spaceId' => $space->id]) }}" class="hs-dropdown-btn flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-accent focus:outline-none focus:bg-gray-200">
                                 <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -141,7 +141,7 @@
                                 Edit
                             </a>
                             <hr class="border-gray-200">
-                            <form action="{{ route('space.destroy', ['spaceId' => $space->id, 'userId' => $userId]) }}" method="post" class="m-0">
+                            <form action="{{ route('space.destroy', ['spaceId' => $space->id, 'userId' => $userId]) }}" method="post" class="hs-dropdown-btn m-0">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
@@ -164,7 +164,7 @@
                             </form>
                         </x-dropdown>
                     </div>
-                    <div class="space-y-6 md:space-y-4">
+                    <div id="space-card" data-space-card data-user-id="{{ $userId }}" data-space-id="{{ $space->id }}" class="space-y-6 md:space-y-4">
                         <!-- description -->
                         <div>
                             <p class="text-text open-sans-regular text-xs md:text-sm text-justify indent-4 whitespace-normal">

@@ -60,7 +60,7 @@
                     <x-list-not-found object="tasks" key="Add Task"/>
                 @endif
                 @foreach($tasks as $task)
-                    <div class="w-full px-4 py-2 flex flex-row justify-between items-stretch gap-4 divide-x divide-slate-100 border border-slate-200 rounded-md shadow-sm cursor-pointer duration-300 ease-in-out hover:shadow hover:scale-[1.01] {{ $task->status == 0 ? 'checked' : '' }}">
+                    <div class="w-full px-4 py-2 flex flex-row justify-between items-stretch gap-4 divide-x divide-slate-100 border border-slate-200 rounded-md shadow-sm cursor-pointer duration-300 ease-in-out hover:shadow hover:scale-[1.01] {{ $task->status == 0 ? 'checked' : ($task->status == 3 ? 'warning' : '') }}">
                         <div data-user-id="{{ $userId }}" data-space-id="{{ $spaceId }}" data-task-id="{{ $task->id }}" data-task-status="{{ $task->status }}" class="w-full flex flex-col grow-0 justify-start items-start gap-2">
                             <div class="flex flex-col lg:flex-row items-start gap-1 lg:gap-4">
                                 <div class="flex flex-col justify-center items-start">
@@ -78,6 +78,8 @@
                                 </div>
                                 @if($task->status == 0)
                                         <span class="py-1 px-2 text-background open-sans-bold text-xs bg-green-600 rounded-full">Completed</span>
+                                @elseif($task->status == 3)
+                                        <span class="py-1 px-2 text-background open-sans-bold text-xs bg-red-600 rounded-full">Overdue</span>
                                 @endif
                             </div>
                             <p class="text-xs open-sans-regular text-justify">

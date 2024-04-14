@@ -150,3 +150,7 @@
 .checked {
     @apply ring-2 ring-green-500 bg-green-100;
 }
+
+.warning {
+    @apply ring-2 ring-red-500 bg-red-100;
+}
