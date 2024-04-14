@@ -60,7 +60,7 @@
                     <x-list-not-found object="tasks" key="Add Task"/>
                 @endif
                 @foreach($tasks as $task)
-                    <div id="task-card" data-user-id="{{ $userId }}" data-space-id="{{ $spaceId }}" data-task-id="{{ $task->id }}" class="w-full px-4 py-2 flex flex-row justify-between items-stretch gap-4 divide-x divide-slate-100 border border-slate-200 rounded-md shadow-sm cursor-pointer duration-300 ease-in-out hover:shadow hover:scale-[1.01] {{ $task->status == 0 ? 'line-through' : '' }}">
+                    <div data-user-id="{{ $userId }}" data-space-id="{{ $spaceId }}" data-task-id="{{ $task->id }}" data-task-status="{{ $task->status }}" class="w-full px-4 py-2 flex flex-row justify-between items-stretch gap-4 divide-x divide-slate-100 border border-slate-200 rounded-md shadow-sm cursor-pointer duration-300 ease-in-out hover:shadow hover:scale-[1.01] {{ $task->status == 0 ? 'checked' : '' }}">
                         <div class="flex flex-col grow-0 justify-start items-start gap-2">
                             <div class="flex flex-col justify-center items-start">
                                 <h3 class="text-xs lg:text-sm text-text open-sans-semibold capitalize">

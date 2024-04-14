@@ -146,3 +146,7 @@
 .line-through {
     text-decoration: line-through;
 }
+
+.checked {
+    color: #f1c40f;
+}

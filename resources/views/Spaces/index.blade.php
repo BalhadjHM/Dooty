@@ -51,7 +51,7 @@
                 </x-container>
             @endif
             @foreach($spaces as $space)
-                <x-container id="space-card" data-user-id="{{ $userId }}" data-space-id="{{ $space->id }}" class="cursor-pointer duration-300 ease-in-out hover:scale-[1.02]">
+                <x-container id="space-card" data-space-card data-user-id="{{ $userId }}" data-space-id="{{ $space->id }}" class="cursor-pointer duration-300 ease-in-out hover:scale-[1.02]">
                     <div class="mb-4 pb-4 flex justify-between items-center border-b-2 border-accent">
                         {{--Title--}}
                         <h2 class="text-text text-xl md:text-2xl poppins-bold capitalize">
