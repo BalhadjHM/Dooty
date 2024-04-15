@@ -78,7 +78,13 @@ class HomeController extends Controller
         ]);
 
         // Retrieve the user details
-        $id = User::where('email', request('email'))->first()->id;
+        $user = User::where('email', request('email'))->first();
+
+        // check if the user exists
+        if (!$user) {
+            return redirect()->route('user.login')->withErrors(['error' => 'Invalid email or password, please try again.']);
+        }
+        $id = $user->id;
         $email = request('email');
         $password = request('password');
 

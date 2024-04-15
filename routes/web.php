@@ -14,7 +14,7 @@ Route::get('/login', [HomeController::class , 'login'])->name('user.login');
 Route::post('/login', [HomeController::class , 'authenticate'])->name('user.authenticate');
 
 // authentication middleware
-Route::middleware(['auth'])->group(function () {
+Route::middleware([\App\Http\Middleware\Authenticate::class])->group(function () {
     // dashboard routes
     Route::get('/dashboard/{userId}', [SpaceController::class , 'index'])->name('user.index');
     Route::get('/dashboard/{userId}/create', [SpaceController::class , 'create'])->name('space.create');
