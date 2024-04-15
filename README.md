@@ -34,7 +34,9 @@ To contribute, follow these steps:
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within Dooty, please send an email to [security@dooty.com](mailto:ebalhadj@gmail.com). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within Dooty, please email [ebalhadj@gmial.com](mailto:ebalhadj@gmail.com).
+
+All security vulnerabilities will be promptly addressed.
 
 ## Open Source
 
