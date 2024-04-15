@@ -15,7 +15,7 @@
         <x-container>
             <x-form-container>
                 <x-slot name="image">
-                    <img class="mx-auto w-40 sm:w-52 max-h-40 sm:max-h-52" src="{{ asset('images/marshmallow 1.png') }}" alt="Logo">
+                    <img class="mx-auto w-40 sm:w-52 max-h-40 sm:max-h-52" src="{{ asset('images/marshmallow 7.png') }}" alt="Logo">
                 </x-slot>
                 <x-slot name="title">
                     Create Space

@@ -62,7 +62,7 @@
                             @endif
                         </h2>
                         {{--Dropdown menu--}}
-                        <x-dropdown>
+                        <x-dropdown class="pl-4">
                             @if($space->pinned == 0)
                                 <form action="{{ route('space.pin', ['userId' => $userId, 'spaceId' => $space->id]) }}" method="post" class="hs-dropdown-btn m-0">
                                     @csrf
